@@ -1,0 +1,5 @@
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)
+importFrom("utils", "install.packages")
+importFrom("settings", "options_manager")
+useDynLib(PPRL)
