@@ -294,7 +294,7 @@ string CreateEnsembleCLKc(vector<string> vars, int k, int NumberOfCLK, vector<in
   }
   //vector int for to count set bits
   int *majority = new int[lenBloom];
-  memset(majority, 0, sizeof(majority));
+  memset(majority, 0, lenBloom);
   //for every variable
   for (unsigned i = 0; i < vars.size(); i++) {
     vector<string> qgrams;

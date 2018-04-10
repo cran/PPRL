@@ -234,10 +234,10 @@ inwd[0] = 'S';
               && (varson.find(local[n - 1]) != string::npos)) {
           break;
         }
-        if (vowels.find(local[n + 1]) >= 0) {
+        /*if (vowels.find(local[n + 1]) >= 0) { */ // unsigned int is always greater_equal zero
           code.push_back('H');
           mtsz++; // Hvowel
-        }
+        /*}*/
         break;
       case 'F':
       case 'J':
@@ -307,8 +307,7 @@ inwd[0] = 'S';
         break;
       case 'W':
       case 'Y': // silent if not followed by vowel
-        if (((n + 1) < wdsz)
-              && (vowels.find(local[n + 1]) >= 0)) {
+        if (((n + 1) < wdsz)) {
           code.push_back(symb);
           mtsz++;
         }

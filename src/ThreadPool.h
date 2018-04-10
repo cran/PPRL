@@ -156,10 +156,7 @@ ThreadPool<T>::ThreadPool(int size) {
 
 		// start thread
 		int rc = pthread_create(&mPool[i], &pthreadAttr, threadWrapper<T>, (void*) (&(mThreadData[i])));
-    // #pragma clang diagnostic push
-    // #pragma clang diagnostic ignored "-Wself-assign"
-		rc = rc; // suppress warning in non-debug-mode
-    // #pragma clang diagnostic pop
+		//rc = rc;
 		assert(rc == 0);
 
 		// put all threads on thread stack

@@ -1,9 +1,9 @@
-ea3d5cfc31e1ed12c892b098c45b5253 *DESCRIPTION
+6121abbc258a5fee0b81e287128ef217 *DESCRIPTION
 28a4af0bfd36b7ed44c576d38558963d *NAMESPACE
 105a854b91d773f4d208a49cfad7511b *R/Linkage.R
 299084ef41dcbb55960cb4bc8d64bfa1 *R/MTBOptions.R
 8f6ad96b37cd3d37e2b9afea2a64a1e3 *R/PPRL.R
-f28ea61b679c92f44649176eaadeeea7 *R/RcppExports.R
+9fa8dadc4d0903e4abff47ba92c6a865 *R/RcppExports.R
 5886859446e756294c5ddd5b9d26355d *inst/extdata/TestMatrize.csv
 abecc01b2aadf76b4a7ea24e91e87a8f *inst/extdata/testdata.csv
 dde0b786122aef3e85b35aa63ee96cd6 *inst/include/flowWorkspace.h
@@ -49,7 +49,7 @@ c13b964ef98c7e1cec214fabad673ee9 *src/CanopyClustering.h
 eacbe16116955a0de1558b25817ac6c3 *src/CreateALC.h
 97f5ad698c627e1d6c572193a6f0b4fa *src/CreateBalancedBF.cpp
 00546e25f7b2fe8a257b475a1ebc96ec *src/CreateBalancedBF.h
-0fa776a219a09f18dc9b87561866ffcc *src/CreateCLKBigramSeed.cpp
+3e09d05054464d3f672706886341e061 *src/CreateCLKBigramSeed.cpp
 73bc31d1ad5e5fb89897946794b187b2 *src/CreateCLKBigramSeed.h
 6fdedbf8e3a5f0828fc2df6e0198e5a2 *src/CreateCLKWrapper.cpp
 b6c89eae290a303cf43b835b1160000a *src/CreateCLKWrapper.h
@@ -98,7 +98,7 @@ fb815070f59891d7372df6fe87179642 *src/MTB_LCS.h
 67aa6e5b59a86b2b4c89912f0f29558c *src/MTB_Levenshtein.h
 4db60270ea276600eed1572f5a02fbed *src/MTB_MergeData.cpp
 7e385fc99fafef8131d0f567ae5b96c8 *src/MTB_MergeData.h
-29dbef433f8675728b9c024990c99897 *src/MTB_Metaphone.cpp
+60cfdd06b6f5332370692c0ee1f93d14 *src/MTB_Metaphone.cpp
 d855f906d1ec2a861c298744582e8638 *src/MTB_Metaphone.h
 848dce849c37d98411cc0654552d4856 *src/MTB_Ngram.cpp
 1116de3d524865de8a5f53f51846dada *src/MTB_Ngram.h
@@ -129,7 +129,7 @@ faf149cd8fe6b9a833cde397c2cc8e94 *src/Standardisation.cpp
 838407ff8229cfa156ceaf6d62847618 *src/Standardisation.h
 78816d398883749575ff208bfd8c1abb *src/StandardizeString.cpp
 f18c97ab898ddc9dda48e216779431d2 *src/Tasks.h
-e6c58aeb9a9aec6320f9f2f903370e37 *src/ThreadPool.h
+ddb0abe68644425acba9e3c872e54d78 *src/ThreadPool.h
 7e57521c51a36e58451219e2a0c50015 *src/UnionTree.h
 c91caea57147ea0ca9e9de5d67490ba9 *src/Util.cpp
 ea1a37b4c2044ec496cd7693535f1e15 *src/Util.h
