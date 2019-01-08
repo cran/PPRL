@@ -39,7 +39,7 @@ ElegantPairingInt(2, 3)
 }
 
 \seealso{
-  \code{\link{PPRL}},
+  
   \code{\link{ElegantPairingVec}}
 }
 

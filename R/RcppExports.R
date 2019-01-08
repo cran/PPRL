@@ -17,10 +17,6 @@ CompareAS16 <- function(IDA, dataA, IDB, dataB, password, t = 0.85) {
     .Call('_PPRL_CompareAS16', PACKAGE = 'PPRL', IDA, dataA, IDB, dataB, password, t)
 }
 
-.BloomfilterLinkagec <- function(IDA_, dataA_, blockingdataA_, IDB_, dataB_, blockingdataB_, method_, blocking_, threshold_, windowSize_, looseThreshold_, tightThreshold_, threads_, leaflimit_, symdex_) {
-    .Call('_PPRL_BloomfilterLinkagec', PACKAGE = 'PPRL', IDA_, dataA_, blockingdataA_, IDB_, dataB_, blockingdataB_, method_, blocking_, threshold_, windowSize_, looseThreshold_, tightThreshold_, threads_, leaflimit_, symdex_)
-}
-
 CreateBalancedBF <- function(ID, data, password) {
     .Call('_PPRL_CreateBalancedBF', PACKAGE = 'PPRL', ID, data, password)
 }
@@ -37,7 +33,7 @@ CreateMarkovCLK <- function(ID, data, password, markovTable, k1 = 20L, k2 = 4L, 
     .Call('_PPRL_CreateMarkovCLK', PACKAGE = 'PPRL', ID, data, password, markovTable, k1, k2, padding, qgram, lenBloom, includeOriginalBigram, v)
 }
 
-CreateEnsembleCLK <- function(ID, data, password, NumberOfCLK, k = 20L, padding = as.integer( c(0)), qgram = as.integer( c(2)), lenBloom = 1000L) {
+CreateEnsembleCLK <- function(ID, data, password, NumberOfCLK = 1L, k = 20L, padding = as.integer( c(0)), qgram = as.integer( c(2)), lenBloom = 1000L) {
     .Call('_PPRL_CreateEnsembleCLK', PACKAGE = 'PPRL', ID, data, password, NumberOfCLK, k, padding, qgram, lenBloom)
 }
 

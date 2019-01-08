@@ -43,15 +43,17 @@ testData <- read.csv(testFile, head = FALSE, sep = "\t",
 testData <- CreateBF(ID = testData$V1, testData$V7, k = 20, padding = 1,
   q = 2, l = 1000, password = "(H]$6Uh*-Z204q")
 
-# Optional: Create the new Bloom filter
+# Optional: Create the new Bloom filter, the output of this function is just
+# to see the created bit vectors, it is not the input of CompareAS16.
 testAS <- CreateAS16(testData$ID, testData$CLKs, password = "khäuds")
 
-# Compare bit vectcors
+# Compare bit vectcors, input is not the out put of CreateAS16,
+# but the original Bloom Filters. CreateAS16 is executated in CompareAS16.
 res <- CompareAS16(testData$ID, testData$CLKs, testData$ID, testData$CLKs,
   password = "khäuds", t = 0.85)
 
 }
 \seealso{
-  \code{\link{PPRL}},
+  
   \code{\link{CreateAS16}}
 }

@@ -50,6 +50,7 @@ string CreateBFBigramSeed(string vars, int k, int padding,
    bf->copyToString (CLKout, lenBloom+11);
     string CLKouts = CLKout;
     delete[] CLKout;
+    delete bf;
    return CLKouts;
 } //end CreateBFBigramSeed
 
@@ -102,12 +103,14 @@ string CreateCLKBigramSeed(vector<string> vars, int k, vector<int> padding,
   clk->copyToString(CLKout,lenBloom+1);
   string CLKouts = CLKout;
   delete[] CLKout;
+  delete clk;
   return CLKouts;
 } //end CreateCLKBigramSeed
 
 string CreateMarkovCLKc(vector<string> vars, int k1, int k2, vector<int> padding,
                      vector<int> lenQgram, unsigned lenBloom, vector<string> password,
-                     vector<vector<float>> markovTable, vector<string> rownames, vector<string> colnames, bool includeOriginalBigram, bool v) {
+                     vector<vector<float>> markovTable, vector<string> rownames, vector<string> colnames, bool includeOriginalBigram, bool v)
+  {
 
   //Standardisation
   unsigned max_size = 0;// max length of input strings
@@ -195,8 +198,9 @@ string CreateMarkovCLKc(vector<string> vars, int k1, int k2, vector<int> padding
   clk->copyToString(CLKout, lenBloom+1);
   string CLKouts = CLKout;
   delete[] CLKout;
+  delete clk;
   return CLKouts;
-} //end CreateCLKMarkov
+} //end CreateCLKMarkovc
 
 
 string CreateMarkovCLKOldc(vector<string> vars, int k, vector<int> padding,
@@ -294,7 +298,10 @@ string CreateEnsembleCLKc(vector<string> vars, int k, int NumberOfCLK, vector<in
   }
   //vector int for to count set bits
   int *majority = new int[lenBloom];
-  memset(majority, 0, lenBloom);
+  for (int i = 0; i < lenBloom; i++){
+    majority[i] = 0;
+  }
+  //memset(majority, 0, lenBloom);
   //for every variable
   for (unsigned i = 0; i < vars.size(); i++) {
     vector<string> qgrams;
@@ -339,7 +346,8 @@ string CreateEnsembleCLKc(vector<string> vars, int k, int NumberOfCLK, vector<in
         majority[l]++;
       }
     }
-    if (majority[l]>NumberOfCLK/2){
+    if (majority[l]>
+          NumberOfCLK/2){
       clkres->setBit(l);
     }
   }
@@ -347,6 +355,10 @@ string CreateEnsembleCLKc(vector<string> vars, int k, int NumberOfCLK, vector<in
   string CLKouts = CLKout;
   delete[] CLKout;
   delete[] majority;
+  for (int n = 0; n < NumberOfCLK; n++){
+    delete clk[n];
+  }
+  delete clkres;
   return CLKouts;
 } //end CreateCLKMajority
 

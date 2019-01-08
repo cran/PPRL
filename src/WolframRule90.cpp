@@ -32,8 +32,8 @@ CharacterVector WolframRule90(CharacterVector ID, CharacterVector data, int lenB
    }
    delete[] id;
    delete[] str;
-   clkin->~CLK();
-   clkout->~CLK();
+   delete clkin;
+   delete clkout;
    return CLKout;
 }
 

@@ -454,9 +454,6 @@ public:
 
   void copyToString(char *str, int n);
 
-  // convert CLK to boolean/logical array of size n
-
-  void copyToBool(bool* out, int n);
 
   // convert CLK to int array of size n
   void copyToInt(int* out, int n);

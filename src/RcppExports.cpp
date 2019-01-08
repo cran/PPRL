@@ -34,12 +34,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // CreateAS16
-CharacterVector CreateAS16(SEXP ID, CharacterVector data, SEXP password);
+DataFrame CreateAS16(CharacterVector ID, CharacterVector data, SEXP password);
 RcppExport SEXP _PPRL_CreateAS16(SEXP IDSEXP, SEXP dataSEXP, SEXP passwordSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type ID(IDSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type ID(IDSEXP);
     Rcpp::traits::input_parameter< CharacterVector >::type data(dataSEXP);
     Rcpp::traits::input_parameter< SEXP >::type password(passwordSEXP);
     rcpp_result_gen = Rcpp::wrap(CreateAS16(ID, data, password));
@@ -59,31 +59,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< SEXP >::type password(passwordSEXP);
     Rcpp::traits::input_parameter< float >::type t(tSEXP);
     rcpp_result_gen = Rcpp::wrap(CompareAS16(IDA, dataA, IDB, dataB, password, t));
-    return rcpp_result_gen;
-END_RCPP
-}
-// BloomfilterLinkagec
-DataFrame BloomfilterLinkagec(SEXP IDA_, SEXP dataA_, SEXP blockingdataA_, SEXP IDB_, SEXP dataB_, SEXP blockingdataB_, SEXP method_, SEXP blocking_, SEXP threshold_, SEXP windowSize_, SEXP looseThreshold_, SEXP tightThreshold_, SEXP threads_, SEXP leaflimit_, SEXP symdex_);
-RcppExport SEXP _PPRL_BloomfilterLinkagec(SEXP IDA_SEXP, SEXP dataA_SEXP, SEXP blockingdataA_SEXP, SEXP IDB_SEXP, SEXP dataB_SEXP, SEXP blockingdataB_SEXP, SEXP method_SEXP, SEXP blocking_SEXP, SEXP threshold_SEXP, SEXP windowSize_SEXP, SEXP looseThreshold_SEXP, SEXP tightThreshold_SEXP, SEXP threads_SEXP, SEXP leaflimit_SEXP, SEXP symdex_SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type IDA_(IDA_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type dataA_(dataA_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type blockingdataA_(blockingdataA_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type IDB_(IDB_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type dataB_(dataB_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type blockingdataB_(blockingdataB_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type method_(method_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type blocking_(blocking_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type threshold_(threshold_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type windowSize_(windowSize_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type looseThreshold_(looseThreshold_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type tightThreshold_(tightThreshold_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type threads_(threads_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type leaflimit_(leaflimit_SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type symdex_(symdex_SEXP);
-    rcpp_result_gen = Rcpp::wrap(BloomfilterLinkagec(IDA_, dataA_, blockingdataA_, IDB_, dataB_, blockingdataB_, method_, blocking_, threshold_, windowSize_, looseThreshold_, tightThreshold_, threads_, leaflimit_, symdex_));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -340,7 +315,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_PPRL_Create581", (DL_FUNC) &_PPRL_Create581, 4},
     {"_PPRL_CreateAS16", (DL_FUNC) &_PPRL_CreateAS16, 3},
     {"_PPRL_CompareAS16", (DL_FUNC) &_PPRL_CompareAS16, 6},
-    {"_PPRL_BloomfilterLinkagec", (DL_FUNC) &_PPRL_BloomfilterLinkagec, 15},
     {"_PPRL_CreateBalancedBF", (DL_FUNC) &_PPRL_CreateBalancedBF, 3},
     {"_PPRL_CreateDoubleBalancedBF", (DL_FUNC) &_PPRL_CreateDoubleBalancedBF, 3},
     {"_PPRL_CreateCLK", (DL_FUNC) &_PPRL_CreateCLK, 7},

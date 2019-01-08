@@ -66,14 +66,12 @@ res <- ProbabilisticLinkage(testData$V1, testData,
 
 }
 \seealso{
-  \code{\link{PPRL}},
-  \code{\link{BloomFilterLinkage}},
+
   \code{\link{CreateBF}},
   \code{\link{CreateCLK}},
   \code{\link{DeterministicLinkage}},
   \code{\link{SelectBlockingFunction}},
   \code{\link{SelectSimilarityFunction}},
-  \code{\link{SelectSimilarityFunctionBF}},
   \code{\link{StandardizeString}}
 
 }

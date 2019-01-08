@@ -61,21 +61,6 @@ void CLK::copyToString(char *str, int n) {
   str[l] = 0;
 }
 
-// convert CLK to boolean/logical array of size n
-
-void CLK::copyToBool(bool* out, int n){
-  int l;
-
-  l = MIN(mLength, n);
-  for (int i = 0; i < l; i++) {
-    if (getBit(i) == 0) {
-      out[i]=0;
-    } else {
-      out[i]=1;
-    }
-  }
-}
-
 
 // convert CLK to int array of size n
 
@@ -112,7 +97,7 @@ void CLK::copyFromString(char * id, const char *str)
     }
   }
 
-  init();
+  //init();
   //fold();
 }
 

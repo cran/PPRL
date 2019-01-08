@@ -25,6 +25,7 @@ double MTB_InternalProbabilisticComparisonsObservation::calculateQuality(
   MTB_Similarity *algorithm = mergingConfiguration.getAlgorithm();
   if (algorithm == NULL) {
     Rcpp::Rcerr << "no algorithm set!" << algorithm << endl;
+    delete algorithm;
     return 0.0;
   }
 
@@ -37,6 +38,7 @@ double MTB_InternalProbabilisticComparisonsObservation::calculateQuality(
   if ((val1.length() < 1) || (val2.length() < 1)) {
     // missing value
     res1->addResult(ID1, ID2, missingValue);
+    delete algorithm;
     return missingValue;
   }
 
@@ -48,9 +50,11 @@ double MTB_InternalProbabilisticComparisonsObservation::calculateQuality(
   // fellegi-sunter, if similarity is 0 or 1
   if (agreement == 1) {
     res1->addResult(ID1, ID2, wa);
+    delete algorithm;
     return wa;
   } else if (agreement == 0) {
     res1->addResult(ID1, ID2, wd);
+    delete algorithm;
     return wd;
   }
 
@@ -60,6 +64,7 @@ double MTB_InternalProbabilisticComparisonsObservation::calculateQuality(
   // } else {
   // }
   res1->addResult(ID1, ID2, res);
+  delete algorithm;
   return res;
 }
 
@@ -82,12 +87,13 @@ double MTB_InternalProbabilisticComparisonsObservation::calculateDistance(
   MTB_Similarity *algorithm = mergingConfiguration.getAlgorithm();
   if (algorithm == NULL) {
     Rcpp::Rcerr << "no algorithm set!" << algorithm << endl;
+    delete algorithm;
     return 0.0;
   }
 
   // calculate similarity
   double distance = algorithm->getAbsoluteValue(val1, val2);
-
+  delete algorithm;
   return distance;
 }
 

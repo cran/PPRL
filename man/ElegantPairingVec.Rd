@@ -50,6 +50,6 @@ res <- ElegantPairingVec(testData$V1, dataInt)
 
 }
 \seealso{
-  \code{\link{PPRL}},
+  
   \code{\link{ElegantPairingInt}}
 }

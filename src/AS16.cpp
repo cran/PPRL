@@ -1,142 +1,160 @@
-#include "AS16.h"
+#include <Rcpp.h>
+#include <random>
+#include <string>
+
+using namespace Rcpp;
 using namespace std;
 
+int computeHWNew(string s);
+vector<int> computeHWs(vector<string>);
+string CreateAS16cNew(string r, string password);
+float CompareArmknechtCLKNew(string d1, string d2s);
+
+
 /**
-* Wrapper function for Create
-*/
+ * Function for Create
+ *
+ * This method is not necessary for compare, it is just to see the output of the method create
+ *
+ * @param id1 IDs of CLK1
+ * @param CLK1 vector of CLKs to be encoded
+ * @param id2 IDs of CLK2
+ * @param CLK2 vector of CLKs to be encoded
+ * @param password codeword to create vectors
+ * @param t Tanomito similartiy to be tested
+ */
 
-vector<string> CreateArmknechtc(vector<string> IDc, vector<string> CLKin ,string password) {
-  //output
-  vector<string> CLKout;
-  // random bit
-  bool b;
-  // compute length of Bloom Filter
-  int lenBloom;
-  if (CLKin.size()>0)
-    lenBloom = CLKin[0].size();
-  else{
-    Rcpp::Rcerr << "Missing input data.";
-    return CLKout;
-  }
-  // Create CLK r and w
-  CLK* r = new CLK(lenBloom);
-  r->init();
-  CLK *w = new CLK(lenBloom);
-  w->init();
-  char *str = new char[lenBloom + 1];
-  char id[100];
+// [[Rcpp::export]]
+DataFrame CreateAS16(CharacterVector ID, CharacterVector data,  SEXP password) {
+    //Algorithm 1 Procedure Create
+    vector<int> hw;
+    vector<string> d;
+    vector<string> CLKs = Rcpp::as < vector < string > >(data);
+    string passwordc =  as<string>(password);
+    hw = computeHWs(CLKs);
 
-  //Generate lenBloom/2 randoms bit b dependened on password as seed
-  seed_seq seed(password.begin(), password.end());
-  default_random_engine engine(seed);
-  vector<int> randomBits(lenBloom/2);
-  uniform_int_distribution<int> distr(0, lenBloom - 1);
-  generate(begin(randomBits), end(randomBits), [&]() {return distr(engine);});
+    for (int i = 0; i < data.length(); i ++){
+      d.push_back(CreateAS16cNew(CLKs[i], passwordc));
+    }
 
-  //for all lines
-  for (int i =0; i < (int)CLKin.size() ; i++){
-    //fill CLK r with input
-    r->clear();
-    strcpy(id, IDc[i].c_str()); //
-    strcpy(str, CLKin[i].c_str());
-    r->copyFromString(id, str);
-    // fill CLK w
-    w->clear();
-    for (int i =1; i < lenBloom/2 ; i++){
-      //Choose a random bit b
-      b=randomBits[i]%2;
-      if (b==1){
-        w->setBit(2*i-1);
-        w->setBit(2*i);
+    return DataFrame::create(
+      Named("ID") = Rcpp::wrap(ID),
+      Named("d") = Rcpp::wrap(d),
+      Named("hw") = Rcpp::wrap(hw),
+      Named("stringsAsFactors") = false);
+    }
+
+
+/**
+ * Creates two vectors from CLKs according to Armknechts method create
+ * and compares them to each other
+ *
+ * @param d1_ encoded record 1
+ * @param h1 Hamming weights of the (unknown) record 1
+ * @param d2_ encoded record 2
+ * @param h2 Hamming weights of the (unknown) record 2
+ * @param password codeword to create vectors
+ * @param t Tanomito similartiy to be tested
+ */
+//[[Rcpp::export]]
+DataFrame CompareAS16( CharacterVector IDA, CharacterVector dataA,  CharacterVector IDB, CharacterVector dataB, SEXP password, float t =0.85) {
+  vector<string> CLKsA = Rcpp::as < vector < string > >(dataA);
+  vector<string> CLKsB = Rcpp::as < vector < string > >(dataB);
+  string passwordc =  as<string>(password);
+  float x;
+  string rA;
+  CharacterVector ID1, ID2;
+  NumericVector value1, value2, value3, value4 ;
+  for(unsigned i = 0; i< CLKsA.size(); i++){
+    rA = CreateAS16cNew(CLKsA[i], passwordc);
+    for(unsigned j = 0; j< CLKsB.size(); j++){
+      x = CompareArmknechtCLKNew(rA, CreateAS16cNew(CLKsB[j], passwordc));
+      if (x<=((1-t)/(t+1))){
+        ID1.push_back(IDA[i]);
+        ID2.push_back(IDB[j]);
+        value1.push_back(x);
+        value2.push_back(((1-t)/(t+1)));
+        value3.push_back(x <= ((1-t)/(t+1)));
+        value4.push_back(((1-x)/(x+1)));
       }
     }
-    //Xor w and r and save to w
-    w->ClkXOR(r);
-    w->copyToString(str, lenBloom+1);
-
-    CLKout.push_back(string(str));
   }
-  delete[] str;
-  return CLKout;
+
+   return DataFrame::create(Named("ID1") = Rcpp::wrap(ID1) ,
+                          Named("ID2") = Rcpp::wrap(ID2),
+                          //Named("ctr/h1+h2") = value1,
+                          // Named("1-t/t+1") = value2,
+                          Named("similarity") = Rcpp::wrap(value4),
+                          // Named("Res") = (value3 == 1),
+                          Named("stringsAsFactors") = false);
 }
 
-vector<CLK*> CreateArmknechtCLK(int nrow, vector<string> IDc, vector<string> CLKin ,string password) {
-  vector<CLK*> res;
-  // random bit
-  bool b;
-  // compute length of Bloom Filter
-  int lenBloom = 0;
-  if (CLKin.size()>0)
-    lenBloom = CLKin[0].size();
-  else{
-    Rcpp::Rcerr << "Missing input data.";
-    //return 0result;
-  }
-  // Create CLK r and w
-  CLK *r=  new CLK(lenBloom);
-  r->init();
-  CLK *w = new CLK(lenBloom);
-  w->init();
-  char *str = new char[lenBloom + 1];
-  char id[100];
 
+  //convert input from R to cpp
+/**
+ * Algorithm 1 Procedure Create
+ *
+ * @param clkR Record clk of length n
+ */
+string CreateAS16cNew(string r, string password){
+  int n = r.size();
+  //string w(n, '0');
+  string d(n, '0');
+  bool b;
   //Generate lenBloom/2 randoms bit b dependened on password as seed
   seed_seq seed(password.begin(), password.end());
   default_random_engine engine(seed);
-  vector<int> randomBits(lenBloom/2);
-  uniform_int_distribution<int> distr(0, lenBloom - 1);
+  vector<int> randomBits(n/2);
+  uniform_int_distribution<int> distr(0, n - 1);
   generate(begin(randomBits), end(randomBits), [&]() {return distr(engine);});
-
-  //for all lines
-  for (int i =0; i < (int)CLKin.size() ; i++){
-    //fill CLK r with input
-    r->clear();
-    strcpy(id, IDc[i].c_str()); //
-    strcpy(str, CLKin[i].c_str());
-    r->copyFromString(id, str);
-    w->setId(id);
-    // fill CLK w
-    w->clear();
-    for (int i =1; i < lenBloom/2 ; i++){
-      //Choose a random bit b
-      b=randomBits[i]%2;
-      if (b==1){
-        w->setBit(2*i-1);
-        w->setBit(2*i);
-      }
-    }
-    //Xor w and r and save to w
-    w->ClkXOR(r);
-    res.push_back(new CLK(w));
-    }
-  delete[] str;
-  return res;
+    for (int i = 1; i < n/2; i++){
+      b = randomBits[i]%2;
+       if (b){
+         if (r[2*i-1] == '0'){
+           d[2*i-1] = '1';
+         }
+         if (r[2*i] == '0'){
+           d[2*i] = '1';
+         }
+          //w[2*i+1] = '1';
+          //w[2*i] = '1';
+       }else {
+         if (r[2*i-1] == '1'){
+           d[2*i-1] = '1';
+         }
+         if (r[2*i] == '1'){
+           d[2*i] = '1';
+         }
+       }
   }
+  return d;
+}
 
-/**
-* Wrapper function for Compare
-* @param d1_ encoded record 1
-* @param d2_ encoded record 2
-* @param t Tanomito similartiy to be tested
-*/
-
-float CompareArmknechtCLK(CLK* d1, CLK* d2, float t ) {
+float CompareArmknechtCLKNew(string d1, string d2) {
   float ctr=0; //counter, this value will track the estimate for HD(r1, r2).
-  size_t h1 = d1->cardinality();
-  size_t h2 = d2->cardinality();
+  int h1 = computeHWNew(d1);
+  int h2 = computeHWNew(d2);
   // Compute v = (v[1], . . . , v[n]) := d1 ⊕ d2. his yields the XOR of the two records plus a code word.
   //this is done within the if brackets
 
-  for (int i =0; i < d1->getLength() ; i++){
-    i++; //another i++, because two consecutive bit are compared as couples/pairs
-    if(((d1->getBit(i))+(d2->getBit(i)))%2!= ((d1->getBit(i+1))+(d2->getBit(i+1)))%2) // A difference between the two records has been found for sure.
-      ctr++;
-  }
+   for (int i =0; i < d1.size() ; i++){
+     i++; //another i++, because two consecutive bit are compared as couples/pairs
+     if(((int)d1[i] - '0' + (int)d2[i] - '0') % 2 != ((int)d1[i+1]-'0' + (int)d2[i+1]-'0') % 2){ // A difference between the two records has been found for sure.
+       ctr++;
+       }
+   }
   return (ctr/(h1+h2));
 }
 
-size_t computeHW(string s){
-  size_t hw = std::count(s.begin(), s.end(), '1');
+int computeHWNew(string s){
+  int hw = count(s.begin(), s.end(), '1');
   return hw;
 }
 
+vector<int> computeHWs(vector<string> data){
+  vector<int> hw;
+  for (int i = 0; i < data.size(); i++){
+    hw.push_back(computeHWNew(data[i]));
+  }
+  return hw;
+}

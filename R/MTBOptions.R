@@ -38,27 +38,3 @@ SelectBlockingFunction <- function(variable1, variable2, method )
   return(BlockingOptionsRes)
 }
 
-
-# similarity options for MTB
-# uses options_manager from package 'settings'
-SelectSimilarityFunctionBF <- function(variable1, variable2, method = 'mtan', threshold = 0.85, windowSize = 5,
-                                       looseThreshold = 0.8, tightThreshold = 0.7, symdex = TRUE, leaflimit = 3,
-                                       cores = 1)
-{
-  # check methods
-  methodlist <- c('mtan', 'utan', 'mham', 'uham', 'CCtan', 'CCtanXOR', 'SNtan', 'SNtanXOR')
-
-  if (!is.element(method, methodlist)) {
-    cat('Allowed methods are:\n')
-    cat(methodlist, sep = ", ")
-    stop(paste0('error: Option value method = \'',method,'\' out of range.'))
-    method <- NULL
-    return(NULL)
-  }
-
-  MergeOptionsRes <- settings::options_manager(variable1 = variable1, variable2 = variable2, method = method,
-                                     symdex = symdex, leaflimit = leaflimit, cores = cores,
-                                     threshold = threshold, windowSize = windowSize, looseThreshold = looseThreshold, tightThreshold = tightThreshold)
-  return(MergeOptionsRes)
-}
-

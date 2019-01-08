@@ -48,7 +48,7 @@ RR <- CreateBitFlippingBF(BF, password = "l+kfdj1J", f = 0.1)
 
 }
 \seealso{
-  \code{\link{PPRL}},
+  
   \code{\link{CreateBF}},
   \code{\link{CreateCLK}},
   \code{\link{StandardizeString}}

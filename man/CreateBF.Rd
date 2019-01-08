@@ -45,9 +45,7 @@ BF <- CreateBF(ID = testData$V1, data = testData$V7,
 
 }
 \seealso{
-  \code{\link{PPRL}},
-  \code{\link{BloomFilterLinkage}},
+
   \code{\link{CreateCLK}},
-  \code{\link{SelectSimilarityFunctionBF}},
   \code{\link{StandardizeString}}
 }

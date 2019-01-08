@@ -78,4 +78,3 @@ MTB_Similarity* MergingConfiguration::getAlgorithm() {
   return this->similarity;
 }
 
-

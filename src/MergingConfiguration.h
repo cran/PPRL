@@ -60,12 +60,9 @@ private:
   MTB_Similarity *similarity = NULL;
   string algorithm;
   string blocking = "0";
-  int leafLimit = 8;
-  int preproc = 0;
   float looseThreshold = 0.7;
   float tightThreshold = 0.8;
   int windowSize = 5;
-  int threads = 1;
   int lenNgram = 2;
 
 public:
@@ -203,36 +200,6 @@ public:
 
   float getThreshold() {
     return this->threshold;
-  }
-
-  void setLeaflimit(int leafLimit_) {
-    this->leafLimit = leafLimit_;
-  }
-
-  int getLeaflimit() {
-    return this->leafLimit;
-  }
-
-  void setThreads(int threads_) {
-    this->threads = threads_;
-  }
-
-  int getThreads() {
-    return this->threads;
-  }
-
-
-  void setPreproc(int preproc_) {
-    if (preproc_ == 0 || preproc_ == 1) {
-      this->preproc = preproc_;
-    } else {
-      Rcpp::Rcerr << "preproc = 0 -> multibit tree without symdex pre-processing," << endl <<
-        "preproc = 1 -> to activate symdex pre-processing," << endl;
-    }
-  }
-
-  int getPreproc() {
-    return this->preproc;
   }
 
   void setWindowSize(int windowSize_){

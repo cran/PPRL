@@ -5,19 +5,19 @@
 #include "CreateCLKWrapper.h"
 
 /**
- * Wrapper function for CreateCLK
- */
+* Wrapper function for CreateCLK
+*/
 // [[Rcpp::export]]
 DataFrame CreateCLK(SEXP ID, DataFrame data, SEXP password, int k =20, IntegerVector padding = IntegerVector::create(0), IntegerVector qgram = IntegerVector::create(2), unsigned lenBloom =1000 ) {
-    DataFrame res;
-    if (data.size() >1){
-      res = CreateCLKc(ID, data, password, k, padding, qgram, lenBloom );
-    } else if (data.size() == 1) {
-      Rcpp::Rcerr << "Please use CreateBF\n";
-        //res = CreateBFc(ID, data[0], password, k, padding[0], qgram[0], lenBloom );
-    }
-    return res;
+  DataFrame res;
+  if (data.size() >1){
+    res = CreateCLKc(ID, data, password, k, padding, qgram, lenBloom );
+  } else if (data.size() == 1) {
+    Rcpp::Rcerr << "Please use CreateBF\n";
+    //res = CreateBFc(ID, data[0], password, k, padding[0], qgram[0], lenBloom );
   }
+  return res;
+}
 
 DataFrame CreateCLKc(SEXP ID, DataFrame data, SEXP password, int k , IntegerVector padding , IntegerVector qgram, unsigned lenBloom ) {
   int IDsize;
@@ -136,8 +136,8 @@ DataFrame CreateCLKc(SEXP ID, DataFrame data, SEXP password, int k , IntegerVect
 
 
 /**
- * Wrapper function for CreateMarkovCLK
- */
+* Wrapper function for CreateMarkovCLK
+*/
 // [[Rcpp::export]]
 DataFrame CreateMarkovCLK(SEXP ID, DataFrame data, SEXP password, NumericMatrix markovTable, int k1 =20, int k2 =4,
                           IntegerVector padding =IntegerVector::create(0), IntegerVector qgram= IntegerVector::create(2), unsigned lenBloom =1000, bool includeOriginalBigram = true, bool v = false) {
@@ -186,9 +186,9 @@ DataFrame CreateMarkovCLK(SEXP ID, DataFrame data, SEXP password, NumericMatrix 
   }
   else{
     password_ =  Rcpp::as<std::vector<string> > (password);
-  if (data.size() != (unsigned)password_.size()){
-    Rcpp::Rcerr << "vector of password must have the same size as the input data.frame." <<data.nrows() << " "<< password_.size() ;
-    return NULL;}
+    if (data.size() != (unsigned)password_.size()){
+      Rcpp::Rcerr << "vector of password must have the same size as the input data.frame." <<data.nrows() << " "<< password_.size() ;
+      return NULL;}
   }
   //Sizes of Vectors are checked and adapted
   if (data.size() > (unsigned)padding_.size()){
@@ -220,7 +220,7 @@ DataFrame CreateMarkovCLK(SEXP ID, DataFrame data, SEXP password, NumericMatrix 
     }
     //return NULL; Alternative zu Auffüllen ist Programm abzubrechen.
   }
-    //Matrix is filled with input, Types are set to string
+  //Matrix is filled with input, Types are set to string
   for (int i = 0 ; i< data.size(); i++){
     if(TYPEOF(data[i])==STRSXP) {
 
@@ -268,10 +268,10 @@ DataFrame CreateMarkovCLK(SEXP ID, DataFrame data, SEXP password, NumericMatrix 
 
 
 /**
- * Wrapper function for CreateEnsembleCLK
- */
+* Wrapper function for CreateEnsembleCLK
+*/
 // [[Rcpp::export]]
-DataFrame CreateEnsembleCLK(SEXP ID, DataFrame data, SEXP password, int NumberOfCLK , int k =20, IntegerVector padding =IntegerVector::create(0), IntegerVector qgram= IntegerVector::create(2), unsigned lenBloom =1000) {
+DataFrame CreateEnsembleCLK(SEXP ID, DataFrame data, SEXP password, int NumberOfCLK =1 , int k =20, IntegerVector padding =IntegerVector::create(0), IntegerVector qgram= IntegerVector::create(2), unsigned lenBloom =1000) {
   int IDsize;
   if(TYPEOF(ID)==STRSXP){
     vector<string> IDtemp = Rcpp::as<std::vector<string> > (ID);
@@ -317,14 +317,12 @@ DataFrame CreateEnsembleCLK(SEXP ID, DataFrame data, SEXP password, int NumberOf
     for (int i = padding_.size() ; i< data.size(); i++){
       padding_.push_back(0);
     }
-    //return NULL; Alternative zu Auffüllen ist Programm abzubrechen.
   }
   if (data.size() < (unsigned)padding_.size()){
     Rcpp::Rcerr << "Vector padding must have the same size as the input data.frame. Padding will be cut."<< endl;
     while((unsigned)padding_.size() > data.size()){
       padding_.pop_back();
     }
-    //return NULL; Alternative zu Auffüllen ist Programm abzubrechen.
   }
 
   if (data.size() > (unsigned)qgram_.size()){
@@ -332,14 +330,12 @@ DataFrame CreateEnsembleCLK(SEXP ID, DataFrame data, SEXP password, int NumberOf
     for (int i = qgram_.size() ; i< data.size(); i++){
       qgram_.push_back(2);
     }
-    //return NULL; Alternative zu Auffüllen ist Programm abzubrechen.
   }
   if (data.size() < (unsigned)qgram_.size()){
     Rcpp::Rcerr << "Vector qgram must have the same size as the input data.frame. Qgram will be cut."<< endl;
     while((unsigned)qgram_.size() > data.size()){
       qgram_.pop_back();
     }
-    //return NULL; Alternative zu Auffüllen ist Programm abzubrechen.
   }
   //Matrix is filled with input, Types are set to string
   for (int i = 0 ; i < data.size(); i++){
@@ -381,7 +377,6 @@ DataFrame CreateEnsembleCLK(SEXP ID, DataFrame data, SEXP password, int NumberOf
     CLKs[i]=CreateEnsembleCLKc(inputVector, k, NumberOfCLK, padding_, qgram_, lenBloom, password_ );
   }
 
-
   return DataFrame::create(Named("ID") = ID ,
                            Named("CLK") = CLKs,
                            Named("stringsAsFactors") = false);
@@ -398,51 +393,47 @@ DataFrame CreateBF(SEXP ID, SEXP data,SEXP password, int k =20, int padding =1, 
 }
 
 DataFrame CreateBFc(SEXP ID, SEXP data,SEXP password, int k =20, int padding =1, int qgram= 2, unsigned lenBloom =1000 ) {
-   if(TYPEOF(data)!=STRSXP){
-     Rcpp::Rcerr << "Input data must be a vector of Type character.\n" << TYPEOF(data);
-     return 0;
-   }
-   int IDsize;
-   if(TYPEOF(ID)==STRSXP){
-     vector<string> IDtemp = Rcpp::as<std::vector<string> > (ID);
-     IDsize = IDtemp.size();
-   }
-   else if(TYPEOF(ID)==INTSXP) {
-     vector<int> IDtemp = Rcpp::as<std::vector<int> > (ID);
-     IDsize = IDtemp.size();
+  if(TYPEOF(data)!=STRSXP){
+    Rcpp::Rcerr << "Input data must be a vector of Type character.\n" << TYPEOF(data);
+    return 0;
+  }
+  int IDsize;
+  if(TYPEOF(ID)==STRSXP){
+    vector<string> IDtemp = Rcpp::as<std::vector<string> > (ID);
+    IDsize = IDtemp.size();
+  }
+  else if(TYPEOF(ID)==INTSXP) {
+    vector<int> IDtemp = Rcpp::as<std::vector<int> > (ID);
+    IDsize = IDtemp.size();
 
-   }
-    else {
-     Rcpp::Rcerr << "Input ID must be a vector of Type character or int.\n";
-     return 0;
-   }
+  }
+  else {
+    Rcpp::Rcerr << "Input ID must be a vector of Type character or int.\n";
+    return 0;
+  }
 
   vector<string> inputVector = Rcpp::as<std::vector<string> > (data);
   CharacterVector CLKs(inputVector.size()) ;
   string password_ =  as<string>(password);
 
-   int qgram_ = qgram;
-   int padding_ = padding;
-   //CLK* bf = new CLK(lenBloom);
-   //LogicalVector BFout;
-  // LogicalMatrix (inputVector.size(), lenBloom);
-   if (inputVector.size() != (unsigned)IDsize){
-     Rcpp::Rcerr << " ID-Vector and Input-vector must have the same size. " <<inputVector.size() << " " << IDsize << endl;
-     return 0;
-   }
+  int qgram_ = qgram;
+  int padding_ = padding;
+  if (inputVector.size() != (unsigned)IDsize){
+    Rcpp::Rcerr << " ID-Vector and Input-vector must have the same size. " <<inputVector.size() << " " << IDsize << endl;
+    return 0;
+  }
 
 
-   //for each row
+  //for each row
 
-   for (unsigned i = 0 ; i < inputVector.size(); i++){
-     CLKs[i]= CreateBFBigramSeed(inputVector[i], k, padding_, qgram_, lenBloom, password_);
+  for (unsigned i = 0 ; i < inputVector.size(); i++){
+    CLKs[i]= CreateBFBigramSeed(inputVector[i], k, padding_, qgram_, lenBloom, password_);
 
-   }
-   //bf->~CLK();
-   return DataFrame::create(Named("ID") = ID,
-                            Named("CLKs") = CLKs,
-                            Named("stringsAsFactors") = false);
- }
+  }
+  return DataFrame::create(Named("ID") = ID,
+                           Named("CLKs") = CLKs,
+                           Named("stringsAsFactors") = false);
+}
 
 
 /**
@@ -450,10 +441,10 @@ DataFrame CreateBFc(SEXP ID, SEXP data,SEXP password, int k =20, int padding =1,
 */
 //[[Rcpp::export]]
 DataFrame CreateRecordLevelBF(SEXP ID ,DataFrame data, SEXP password, int lenRLBF =1000,  int k =20,
-                       IntegerVector padding = IntegerVector::create(0), IntegerVector qgram= IntegerVector::create(2),
-                       IntegerVector lenBloom = IntegerVector::create(500) , std::string method = "StaticUniform", NumericVector weigths =NumericVector::create(1)) {
+                              IntegerVector padding = IntegerVector::create(0), IntegerVector qgram= IntegerVector::create(2),
+                              IntegerVector lenBloom = IntegerVector::create(500) , std::string method = "StaticUniform", NumericVector weigths =NumericVector::create(1)) {
 
-  int IDsize;
+  int IDsize, n = 0;
   if(TYPEOF(ID)==STRSXP){
     vector<string> IDtemp = Rcpp::as<std::vector<string> > (ID);
     IDsize = IDtemp.size();
@@ -494,7 +485,6 @@ DataFrame CreateRecordLevelBF(SEXP ID ,DataFrame data, SEXP password, int lenRLB
   }
   vector<float> weigths_ = Rcpp::as<std::vector<float> > (weigths);
   CLK* rlbf = new CLK(lenRLBF);
-  CLK **bf =  new CLK*[data.size()];
   DataFrame RLBFout;
   vector<string> RLBF;
   //LogicalMatrix RLBFres(data.nrows(), lenRLBF);
@@ -505,14 +495,12 @@ DataFrame CreateRecordLevelBF(SEXP ID ,DataFrame data, SEXP password, int lenRLB
     for (int i = padding_.size() ; i< data.size(); i++){
       padding_.push_back(0);
     }
-    //return NULL; Alternative zu Auffüllen ist Programm abzubrechen.
   }
   if ((unsigned int)data.size()<padding_.size()){
     Rcpp::Rcerr << "Vector padding must have the same size as the input data.frame. Padding will be cut."<< endl;
     while((unsigned int)padding_.size()> (unsigned int)data.size()){
       padding_.pop_back();
     }
-    //return NULL; Alternative zu Auffüllen ist Programm abzubrechen.
   }
   if ((unsigned int)data.size()>qgram_.size()){
     Rcpp::Rcerr << "Vector qgrams must have the same size as the input data.frame. Qgrams will be fill with 2s." << endl;
@@ -526,7 +514,6 @@ DataFrame CreateRecordLevelBF(SEXP ID ,DataFrame data, SEXP password, int lenRLB
     while((unsigned int)qgram_.size()> (unsigned int)data.size()){
       qgram_.pop_back();
     }
-    //return NULL; Alternative zu Auffüllen ist Programm abzubrechen.
   }
 
   //Matrix is filled with input, Types are set to string
@@ -561,16 +548,22 @@ DataFrame CreateRecordLevelBF(SEXP ID ,DataFrame data, SEXP password, int lenRLB
   }
   if (method != "StaticUniform" &&method != "StaticWeigthed" && method != "DynamicUniform" && method != "DynamicWeigthed"){
     Rcpp::Rcerr << "'method' can't be '" <<method <<"', it must be eihter 'StaticUniform', 'StaticWeigthed', 'DynamicUniform' or 'DynamicWeigthed'\n";
+    delete rlbf;
+    delete[] CLKout;
     return RLBFout;
   }
   if (method == "StaticWeigthed"||method == "DynamicWeigthed"){ // set length of the parts of the rlbf if it is weigthed
     if ((unsigned)weigths_.size() != data.size()){
       Rcpp::Rcerr << "Vector weights must have the same size as the input data.frame.";
+      delete rlbf;
+      delete[] CLKout;
       return RLBFout;
     }
     float sum = accumulate(weigths_.begin(), weigths_.end(), 0.0f);
     if (accumulate(weigths_.begin(), weigths_.end(), 0.0f) !=1.0){ // sum of the has to be 1
       Rcpp::Rcerr << "Sum of weights has to be 1.0. but is " << sum << "\n";
+      delete rlbf;
+      delete[] CLKout;
       return RLBFout;
     }
     //set sizes of the parts
@@ -580,25 +573,29 @@ DataFrame CreateRecordLevelBF(SEXP ID ,DataFrame data, SEXP password, int lenRLB
     weigths_.clear();
     for (int i  = 0 ; i<data.size(); i++){
       if (data.size()>0){
-      weigths_.push_back((float)1/data.size());
+        weigths_.push_back((float)1/data.size());
       }
     }
     rlbf ->setPartsize(data.size(), &weigths_[0]);
   }
+
   if (method == "StaticUniform"||method == "StaticWeigthed"){ // set length of Bloom Filter if "Static"
     if (lenBloom.size()>1){
       Rcpp::Rcerr << "Length of the vector of length of Bloom filters is bigger than 1, all BF have to have the same size, the first value will be taken.";
     }
     for (int i  = 0 ; i<data.size(); i++){
-      bf[i] =  new CLK(lenBloom_);
+      n = i;
     }
   } else { // set length of Bloom Filter if "Dynamic"
     if (data.size() == (unsigned)lenBloomV.size()){
       for (int i  = 0 ; i<data.size(); i++){
-         bf[i] =  new CLK(lenBloomV[i]);
+        n = i;
       }
     } else {
       Rcpp::Rcerr << "Length of the vector of length of Bloom filters has to be the same as the number of variables.";
+      delete rlbf;
+
+      delete[] CLKout;
       return RLBFout;
     }
   }
@@ -606,18 +603,17 @@ DataFrame CreateRecordLevelBF(SEXP ID ,DataFrame data, SEXP password, int lenRLB
     for (int j = 0 ; j<data.size(); j++){
       inputVector[j]=varsM[j][i];
     }
-  rlbf->clear();
-  CreateRBF(rlbf, inputVector, k, padding_, qgram_, lenBloom_, lenRLBF, password_);
-  rlbf->copyToString(CLKout, lenRLBF);
-  RLBF.push_back(CLKout);
- // RLBFres( i, _)=RLBFout;
+    rlbf->clear();
+    CreateRBF(rlbf, inputVector, k, padding_, qgram_, lenBloom_, lenRLBF, password_);
+    rlbf->copyToString(CLKout, lenRLBF);
+    RLBF.push_back(CLKout);
   }
-  //destructor for rlbf;
-  rlbf->~CLK();
+
+  delete rlbf;
   delete[] CLKout;
-  //return RLBFres;
   return DataFrame::create(Named("ID") = ID ,
                            Named("RLBF") = RLBF,
                            Named("stringsAsFactors") = false);
 }
+
 

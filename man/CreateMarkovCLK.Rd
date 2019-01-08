@@ -46,8 +46,7 @@ Schnell, R. (2017): Recent Developments in Bloom Filter-based Methods for Privac
 }
 
 \seealso{
-  \code{\link{PPRL}},
-  \code{\link{BloomFilterLinkage}},
+
   \code{\link{CreateCLK}},
   \code{\link{StandardizeString}}
 }
@@ -59,6 +58,7 @@ testFile <- file.path(path.package("PPRL"), "extdata/testdata.csv")
 testData <-read.csv(testFile, head = FALSE, sep = "\t",
   colClasses = "character")
 
+\dontrun{
 # Load example Markov chain matrix (created from NC Voter Data)
 markovFile <-file.path(path.package("PPRL"), "extdata/TestMatrize.csv")
 markovData <-read.csv(markovFile,  sep = " ",
@@ -74,6 +74,6 @@ CLKMarkov <- CreateMarkovCLK(ID = testData$V1,
   q = c(1, 2, 2, 2),
   password = c("(H]$6Uh*-Z204q", "lkjg", "klh", "KJHklk5"),
   includeOriginalBigram = TRUE)
-
+}
 }
 

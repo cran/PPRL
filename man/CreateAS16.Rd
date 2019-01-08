@@ -41,13 +41,10 @@ testData <- CreateBF(ID = testData$V1, testData$V7, k = 20, padding = 1,
 # Create the new Bloom Filter
 testAS <- CreateAS16(testData$ID, testData$CLKs, password = "khäuds")
 
-# Compare bit vectors
-res <- CompareAS16(testData$ID, testAS, testData$ID, testAS,
-  password = "khäuds", t = 0.85)
 
 }
 \seealso{
-  \code{\link{PPRL}},
+  
   \code{\link{CompareAS16}},
   \code{\link{CreateBF}},
   \code{\link{CreateCLK}}

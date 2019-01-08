@@ -93,18 +93,6 @@ public:
 	 */
 	void setVariablename(string variablename);
 
-//		/**
-//		 *Returns the frequency of the DataValue
-//		 * @return
-//		 */
-//		int getFrequency(){return this->freq;}
-//		/**
-//		 * increases the frequency of the DataValue
-//		 */
-//		void incFrequency()
-//		{
-//			freq += 1;
-//		}
 private:
 	string id;
 	string data;
@@ -189,24 +177,11 @@ public:
 	 */
 	void setVariablename(string variablename);
 
-//		/**
-//		 *Returns the frequency of the DataValue
-//		 * @return
-//		 */
-//		int getFrequency(){return this->freq;}
-//		/**
-//		 * increases the frequency of the DataValue
-//		 */
-//		void incFrequency()
-//		{
-//			freq += 1;
-//		}
 private:
 	vector<string> id;
 	vector<string> data;
 	vector<string> blockingData;
 	string variablename;
-	//int freq =1;
 };
 
 #endif /* MTB_DATA_H_ */

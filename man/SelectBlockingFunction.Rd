@@ -10,7 +10,7 @@
 \title{Select blocking method prior to linkage}
 
 \description{
-Before calling \code{\link{ProbabilisticLinkage}}, \code{\link{DeterministicLinkage}} or \code{\link{BloomFilterLinkage}}, a blocking method can be selected. For each blocking variable desired, the function call has to be repeated.
+Before calling \code{\link{ProbabilisticLinkage}} or \code{\link{DeterministicLinkage}}, a blocking method can be selected. For each blocking variable desired, the function call has to be repeated.
 }
 
 \usage{
@@ -20,7 +20,7 @@ SelectBlockingFunction(variable1, variable2, method)
 \arguments{
   \item{variable1}{Column name of blocking variable 1.}
   \item{variable2}{Column name of blocking variable 2.}
-  \item{method}{Desired blocking method. Possible values are \code{'exact'}, \code{'exactCL'}, \code{'sortedNeighbourhood'} and \code{'mbt'}.}
+  \item{method}{Desired blocking method. Possible values are \code{'exact'} and \code{'exactCL'}.}
 }
 
 \details{
@@ -41,12 +41,10 @@ Christen, P. (2012): Data Matching - Concepts and Techniques for Record Linkage,
 
 
 \seealso{
-  \code{\link{PPRL}},
-  \code{\link{BloomFilterLinkage}},
+
   \code{\link{DeterministicLinkage}},
   \code{\link{ProbabilisticLinkage}},
   \code{\link{SelectSimilarityFunction}},
-  \code{\link{SelectSimilarityFunctionBF}},
   \code{\link{StandardizeString}}
 }
 

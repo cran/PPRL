@@ -48,7 +48,7 @@ res <- CreateALC(ID = testData$V1,
 }
 
 \seealso{
-  \code{\link{PPRL}},
+  
   \code{\link{Create581}},
   \code{\link{StandardizeString}}
 }

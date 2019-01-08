@@ -1,4 +1,4 @@
-# Call for DeterministicLinkage, ProbabilisticLinkage and BloomFilterLinkage
+# Call for DeterministicLinkage and ProbabilisticLinkage
 
 DeterministicLinkage <- function(IDA, dataA, IDB, dataB, blocking = NULL, similarity){
   blA <- vector('character')
@@ -137,39 +137,3 @@ ProbabilisticLinkage <- function(IDA, dataA, IDB, dataB,  blocking = NULL , simi
   }
   return(res)
 }
-
-
-BloomFilterLinkage <- function(IDA, dataA, IDB, dataB, blocking = NULL, similarity){
-  blA <- vector('character')
-  blB <- vector('character')
-  vars1 <- vector('character')
-  vars2 <- vector('character')
-  res <- NULL
-  #method <- character()
-  if (!is.null(blocking)){
-    blA <- dataA[,match(blocking('variable1'),colnames( dataA ))] #gets the number of the column in dataA
-    blB <- dataB[,match(blocking('variable2'),colnames( dataB ))]
-    blockingMethod_ <- blocking('method')
-  }
-  else {
-     blA <- NULL
-     blB <- NULL
-     blockingMethod_ <- "0"
-  }
-  # if similarity is a list
-  if (class(similarity) == "list"){
-    cat("'similarity' can't be a list, it must be a single vector.")
-
-      }
-  # just one similarity option
-  else{
-    vars1 <- c(vars1, dataA[,match(similarity('variable1'),colnames( dataA ))])
-    vars2 <- c(vars2, dataB[,match(similarity('variable2'),colnames( dataB ))])
-    res<-.BloomfilterLinkagec(IDA_ = IDA, dataA_ = dataA[,match(similarity('variable1'), colnames( dataA ))], blockingdataA_ = blA,
-              IDB_ = IDB, dataB_ = dataB[,match(similarity('variable2'),colnames( dataB ))], blockingdataB_ = blB,
-              method_ = similarity('method'), blocking_ = blockingMethod_, threshold_ = similarity('threshold'),
-              windowSize_ = similarity('windowSize'), looseThreshold_ = similarity('looseThreshold'), tightThreshold_ = similarity('tightThreshold'), threads_ = similarity('cores'), leaflimit_ = similarity('leaflimit'), symdex_ = similarity('symdex') )
-  }
-  return(vars1)
-}
-

@@ -77,9 +77,6 @@ Returns a character vector with standardized strings.
 }
 
 
-\seealso{
-  \code{\link{PPRL}}
-}
 
 \examples{
 strings = c("Päter", " Jürgen", " Roß")

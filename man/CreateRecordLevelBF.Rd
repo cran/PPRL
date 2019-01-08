@@ -52,6 +52,7 @@ private record linkage. Dissertation. Vanderbilt University.
 \examples{
 # Load test data
 testFile <- file.path(path.package("PPRL"), "extdata/testdata.csv")
+\dontrun{
 testData <- read.csv(testFile, head = FALSE, sep = "\t",
   colClasses = "character")
 
@@ -90,10 +91,10 @@ RLBF <- CreateRecordLevelBF(ID = testData$V1,
   lenBloom = c(300, 400, 550, 500),
   password = c("(H]$6Uh*-Z204q", "lkjg", "klh", "KJHkälk5"),
   method = "DynamicWeigthed", weigths = c(0.1, 0.1, 0.5, 0.3))
-
+}
 }
 \seealso{
-  \code{\link{PPRL}},
+  
   \code{\link{CreateBF}},
   \code{\link{CreateCLK}},
 }

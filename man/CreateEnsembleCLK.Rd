@@ -16,7 +16,7 @@ Creates multiple CLKs which are combined using a simple majority rule.
 }
 
 \usage{
-CreateEnsembleCLK(ID, data, password, NumberOfCLK , k = 20,
+CreateEnsembleCLK(ID, data, password, NumberOfCLK = 1 , k = 20,
   padding = as.integer(c(0)), qgram = as.integer(c(2)),
   lenBloom = 1000)
 }
@@ -43,11 +43,9 @@ Kuncheva, L. (2014): Combining Pattern Classifiers: Methods and Algorithms. Wile
 }
 
 \seealso{
-  \code{\link{PPRL}},
-  \code{\link{BloomFilterLinkage}},
+
   \code{\link{CreateBF}},
   \code{\link{CreateCLK}},
-  \code{\link{SelectSimilarityFunctionBF}},
   \code{\link{StandardizeString}}
 }
 
@@ -57,7 +55,7 @@ Kuncheva, L. (2014): Combining Pattern Classifiers: Methods and Algorithms. Wile
 testFile <- file.path(path.package("PPRL"), "extdata/testdata.csv")
 testData <-read.csv(testFile, head = FALSE, sep = "\t",
   colClasses = "character")
-
+\dontrun{
 # Create Ensemble CLK
 EnsembleCLK <- CreateEnsembleCLK(ID = testData$V1,
   data = testData[, c(2, 3, 7, 8)],
@@ -65,6 +63,6 @@ EnsembleCLK <- CreateEnsembleCLK(ID = testData$V1,
   q = c(1, 2, 2, 2), l = 1000,
   password = c("HUh4q", "lkjg", "klh", "Klk5"),
   NumberOfCLK = 5)
-
+}
 }
 

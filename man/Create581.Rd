@@ -49,7 +49,7 @@ res <- Create581(ID = testData$V1,
 
 }
 \seealso{
-  \code{\link{PPRL}},
+  
   \code{\link{CreateALC}},
   \code{\link{StandardizeString}}
 }

@@ -40,7 +40,7 @@ Wolfram, S. (1983): Statistical mechanics of cellular automata. Rev. Mod. Phys. 
 
 
 \seealso{
-  \code{\link{PPRL}},
+  
   \code{\link{WolframRule30}}
 }
 

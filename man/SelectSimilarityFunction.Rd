@@ -43,7 +43,6 @@ SelectSimilarityFunction(variable1, variable2,
 \item 'Soundex' = Soundex phonetic
 \item 'Metaphone' = Metaphone phonetic
 \item 'DoubleMetaphone' = Double Metaphone phonetic
-\item 'tanimoto' = Tanimoto distance, only used for Bloom Filters. Bloom Filters must have the same length. 
 }
   }
 
@@ -78,7 +77,7 @@ variable values. The weight factor which determines the Jaro adjusted matching w
 }
 
 \value{
-Calling the function will return a short confirmation message only.
+Calling the function will not return anything.
 }
 
 \references{
@@ -94,12 +93,10 @@ Winkler, W. E. (1988): Using the EM algorithm for weight computation in the Fell
 
 
 \seealso{
-  \code{\link{PPRL}}
-  \code{\link{BloomFilterLinkage}},
+
   \code{\link{DeterministicLinkage}},
   \code{\link{ProbabilisticLinkage}},
   \code{\link{SelectBlockingFunction}},
-  \code{\link{SelectSimilarityFunctionBF}},
   \code{\link{StandardizeString}}
 }
 

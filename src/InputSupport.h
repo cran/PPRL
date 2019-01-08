@@ -56,110 +56,35 @@ private:
 
 public:
 
-  T* parseCLK(string IDc, string CLKin, int64_t line);
-  T* parseCLK(string IDc, string CLKin, int64_t line, int origin);
+  T* parseCLK(string IDc, string CLKin);
+  T* parseCLK(string IDc, string CLKin, int origin);
   void parseAllCLKs(vector<string> IDc, vector<string> CLKin, T ***clks, int64_t *size, int *nBits);
   void parseAllCLKs(vector<string> IDc, vector<string> CLKin, T ***clks, int64_t *size, int *nBits, int origin);
 };
 
-// parse line from file, return number of parsed fields
+// create a CLK
 template<class T>
-int InputSupport<T>::parseLine(FILE *in, char *str, int64_t *idx1, int64_t *end1, int64_t *idx2, int64_t *end2) {
-  // read line from file
-  if (fgets(str, STRSIZE, in) == NULL) {
-    return 0;
-  }
-
-  // parse line, find start of first field
-  *idx1 = 0;
-  while (isWS(str[*idx1]) && (*idx1 < STRSIZE - 1)) {
-    (*idx1)++;
-  }
-
-  // find end of first field
-  *end1 = *idx1;
-  while (!isWS(str[*end1]) && (*end1 < STRSIZE - 1) && !isEOL(str[*end1])) {
-    (*end1)++;
-  }
-
-  if (!isEOL(str[*end1])) {
-    // find start of second field
-    *idx2 = *end1;
-    while (isWS(str[*idx2]) && (*idx2 < STRSIZE - 1)) {
-      (*idx2)++;
-    }
-
-    // find end of second field
-    *end2 = *idx2;
-    while (!isWS(str[*end2]) && (*end2 < STRSIZE - 1) && !isEOL(str[*end2])) {
-      (*end2)++;
-    }
-  } else {
-    *idx2 = 0;
-    *end2 = 0;
-  }
-
-  // cut field 1
-  str[*end1] = 0;
-
-  if (*idx2 != *end2) {
-    // if there are two fields, cut field 2
-    str[*end2] = 0;
-    return 2;
-  }
-
-  return 1;
-}
-
-// read a CLK from file
-template<class T>
-T* InputSupport<T>::parseCLK(string IDc, string CLKin, int64_t line) {
+T* InputSupport<T>::parseCLK(string IDc, string CLKin) {
   char *idStr = new char[13];
-  int lenCLK = CLKin.size(); //length of the CLK
-  char *CLKstr = new char[lenCLK + 1];
+  char CLKstr[STRSIZE];
+
   strcpy(CLKstr, CLKin.c_str());
-
-  if (IDc.length() == 0 && CLKin.length() > 0) {
-    // if Id is missing, use line as id
-
-    sprintf(idStr, "%012" PRId64, line + 1);
-    // create CLK
-    return new T(idStr, CLKstr);
-  } else if (IDc.length() > 0 && CLKin.length() > 0) {
-    strcpy(idStr, IDc.c_str());
-    // create CLK
-    return new T(idStr, CLKstr);
-  }
-  delete[] idStr;
-  delete[] CLKstr;
-  return NULL;
+  strcpy(idStr, IDc.c_str());
+  return new T(idStr, CLKstr);
 }
 
-// read a CLK from file
+// create a CLK
 template<class T>
-T* InputSupport<T>::parseCLK(string IDc, string CLKin, int64_t line, int origin) {
+T* InputSupport<T>::parseCLK(string IDc, string CLKin, int origin) {
   char *idStr = new char[13];
-  int lenCLK = CLKin.size(); //length of the CLK
-  char *CLKstr = new char[lenCLK + 1];
+  char CLKstr[STRSIZE];
+
   strcpy(CLKstr, CLKin.c_str());
-
-  if (IDc.length() == 0 && CLKin.length() > 0) {
-    // if Id is missing, use line as id
-
-    sprintf(idStr, "%012" PRId64, line + 1);
-    // create CLK
-    return new T(idStr, CLKstr, origin);
-  } else if (IDc.length() > 0 && CLKin.length() > 0) {
-    strcpy(idStr, IDc.c_str());
-    // create CLK
-    return new T(idStr, CLKstr, origin);
-  }
-  delete[] idStr;
-  delete[] CLKstr;
-  return NULL;
+  strcpy(idStr, IDc.c_str());
+  return new T(idStr, CLKstr, origin);
 }
 
-// read CLK array from file
+// read CLK array
 template<class T>
 void InputSupport<T>::parseAllCLKs(vector<string> IDc, vector<string> CLKin, T ***clks, int64_t *size, int *nBits) {
   int64_t sizeCLKs;
@@ -168,7 +93,6 @@ void InputSupport<T>::parseAllCLKs(vector<string> IDc, vector<string> CLKin, T *
   T **readCLKs;
 
   sizeCLKs = CLKin.size(); //number of CLKs
-  // second pass: count number of CLKs in file
   maxLen = 0;
 
   if (sizeCLKs == 0) {
@@ -180,16 +104,11 @@ void InputSupport<T>::parseAllCLKs(vector<string> IDc, vector<string> CLKin, T *
   // create array of CLKs
   readCLKs = new T*[sizeCLKs];
 
-  // read CLKs from file
+  // read CLKs
   for (int64_t i = 0; i < sizeCLKs; i++) {
-    // parse line from file
-    readCLKs[i] = parseCLK(IDc[i], CLKin[i], i);
-
-    if (readCLKs[i] == NULL) {
-      sizeCLKs = i;
-      break;
-    }
-
+    // parse line
+    readCLKs[i] = parseCLK(IDc[i], CLKin[i]);
+   //Rcpp::Rcout << "parseAllCLKs " << readCLKs[i]->getId() << endl; hier ok
     // compute maximal length of CLKs
     len = readCLKs[i]->getLength();
     if (len > maxLen) {
@@ -202,7 +121,7 @@ void InputSupport<T>::parseAllCLKs(vector<string> IDc, vector<string> CLKin, T *
   *clks = readCLKs;
 }
 
-// read CLK array from file
+// read CLK array
 template<class T>
 void InputSupport<T>::parseAllCLKs(vector<string> IDc, vector<string> CLKin, T ***clks, int64_t *size, int *nBits, int origin) {
   int64_t sizeCLKs;
@@ -212,7 +131,7 @@ void InputSupport<T>::parseAllCLKs(vector<string> IDc, vector<string> CLKin, T *
   T **readCLKs;
 
   sizeCLKs = CLKin.size(); //number of CLKs
-  // second pass: count number of CLKs in file
+  // second pass: count number of CLKs
   maxLen = 0;
 
   if (sizeCLKs == 0) {
@@ -224,10 +143,10 @@ void InputSupport<T>::parseAllCLKs(vector<string> IDc, vector<string> CLKin, T *
   // create array of CLKs
   readCLKs = new T*[sizeCLKs];
 
-  // read CLKs from file
+  // read CLKs
   for (int64_t i = 0; i < sizeA; i++) {
-    // parse line from file
-    readCLKs[i] = parseCLK(IDc[i], CLKin[i], i, 1);
+    // parse line
+    readCLKs[i] = parseCLK(IDc[i], CLKin[i], 1);
 
     if (readCLKs[i] == NULL) {
       sizeCLKs = i;
@@ -241,10 +160,10 @@ void InputSupport<T>::parseAllCLKs(vector<string> IDc, vector<string> CLKin, T *
     }
   }
 
-  // read CLKs from file
+  // read CLKs
   for (int64_t i = sizeA; i < sizeCLKs; i++) {
-    // parse line from file
-    readCLKs[i] = parseCLK(IDc[i], CLKin[i], i, 2);
+    // parse line
+    readCLKs[i] = parseCLK(IDc[i], CLKin[i], 2);
 
     if (readCLKs[i] == NULL) {
       sizeCLKs = i;

@@ -62,14 +62,17 @@ QueryResult::~QueryResult() {
 
 // delete a node and all its subnodes recursively
 void QueryResult::deleteNode(QueryResultNode *node) {
-	if (node != NULL) {
-		if (node->mQueryId != NULL) {
-			delete[] node->mQueryId;
-		}
-		deleteNode(node->mLeft);
-		deleteNode(node->mRight);
-		delete node;
-	}
+  if (node != NULL) {
+    if (node->mQueryId != NULL) {
+      delete[] node->mQueryId;
+    }
+    if (node->mMatchId != NULL) {
+      delete[] node->mMatchId;
+    }
+    deleteNode(node->mLeft);
+    deleteNode(node->mRight);
+    delete node;
+  }
 }
 
 // add a CLK and the corresponding similarity coefficient to the query result
@@ -145,12 +148,8 @@ void QueryResult::add(char *queryId, char *matchId, double similarity) {
     newNode->mQueryId = NULL;
   }
 
-  if (matchId != NULL) {
     newNode->mMatchId = new char[strlen(matchId) + 1];
     strcpy(newNode->mMatchId, matchId);
-  } else {
-    newNode->mMatchId = NULL;
-  }
 
   newNode->mSimilarity = similarity;
   newNode->mLeft = NULL;
@@ -184,6 +183,4 @@ void QueryResult::add(char *queryId, char *matchId, double similarity) {
   }
 
   mSize++;
-
 }
-

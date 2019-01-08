@@ -38,8 +38,8 @@ CharacterVector WolframRule30(CharacterVector ID, CharacterVector data, int lenB
    }
    delete[] id;
    delete[] str;
-   clkin->~CLK();
-   clkout->~CLK();
+   delete clkin;
+   delete clkout;
    return CLKout;
 }
 
@@ -54,8 +54,6 @@ void WolframRule30c(CLK* clkin, CLK* clkout, int t) {
     Rcpp::Rcerr << "length problem\n";
   }
 
-    // if (j>0)
-    // clkin = clkout;
    for(int i =0; i < length ; i++){
       l=clkin->getBit(left);
       r=clkin->getBit(right);

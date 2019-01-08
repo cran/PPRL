@@ -50,10 +50,8 @@ CLK <- CreateCLK(ID = testData$V1,
 
 }
 \seealso{
-  \code{\link{PPRL}},
-  \code{\link{BloomFilterLinkage}},
+
   \code{\link{CreateBF}},
-  \code{\link{SelectSimilarityFunctionBF}},
   \code{\link{StandardizeString}}
 }
 

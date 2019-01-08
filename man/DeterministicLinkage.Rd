@@ -61,8 +61,7 @@ res <- DeterministicLinkage(testData$V1, testData,
 
 }
 \seealso{
-  \code{\link{PPRL}},
-  \code{\link{BloomFilterLinkage}},
+
   \code{\link{ProbabilisticLinkage}},
   \code{\link{SelectBlockingFunction}},
   \code{\link{SelectSimilarityFunction}},

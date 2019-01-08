@@ -78,13 +78,10 @@ class QueryResult {
 	// destructor
 	~QueryResult();
 
-//	// add a CLK and the corresponding similarity coefficient to the query result
-//	void add(char *queryId, CLK *clk, float similarity);
   // add Id of the CLKs and  the corresponding similarity coefficient to the query result
   void add(char *queryId, char *matchId, double similarity);
 	// add a CLK and the corresponding similarity coefficient to the query result
 	void add(CLK *queryCLK, CLK *clk, float similarity);
-//	void add(string queryId, string queryBitvector, string matchId, string matchBitvector);
 
 	// return root node for reading
 	inline QueryResultNode *getRootNode() {

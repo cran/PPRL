@@ -57,8 +57,7 @@ BB <- CreateBalancedBF(ID = testData$ID, data = testData$CLKs,
 
 }
 \seealso{
-  \code{\link{PPRL}},
-  \code{\link{BloomFilterLinkage}},
+
   \code{\link{CreateBF}},
   \code{\link{CreateBitFlippingBF}},
   \code{\link{CreateCLK}},

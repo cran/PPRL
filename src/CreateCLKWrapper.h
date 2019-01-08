@@ -25,5 +25,6 @@ DataFrame CreateCLKc(SEXP ID, DataFrame data, SEXP password, int k, IntegerVecto
 
 DataFrame CreateBFc(SEXP ID, SEXP data, SEXP password, int k, int padding, int qgram, unsigned lenBloom);
 
+void freeCLKArray(CLK** clk, int n);
 
 #endif

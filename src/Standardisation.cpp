@@ -29,6 +29,29 @@ void ReplaceAllSubstr( string& source, const string& from, const string& to )
   source.swap( newString );
 }
 
+
+void ReplaceAllChar( string& source, char from, const string& to )
+{
+  string newString;
+  newString.reserve( source.length() );  // avoids a few memory allocations
+
+  string::size_type lastPos = 0;
+  string::size_type findPos;
+
+  while( string::npos != ( findPos = source.find( from, lastPos )))
+  {
+    newString.append( source, lastPos, findPos - lastPos );
+    newString += to;
+    lastPos = findPos+1;
+  }
+
+  // Care for the rest after last occurrence
+  newString += source.substr( lastPos );
+
+  source.swap( newString );
+}
+
+
 void toUpper(string &s){
   transform(s.begin(), s.end(),s.begin(), ::toupper);
 }
@@ -59,65 +82,74 @@ bool invalidCharPunct (char c)
   return !((c <48)||(c>=57 && c <=65)||(c>90));
 }
 
+void replaceUmlaut(char c1, char c2){
+
+}
 
 void replaceNonAscii(string& var) {
   preprocess(var);
   ReplaceAllSubstr(var, "\"", "");
-  ReplaceAllSubstr(var, "Æ", "AE");
-  ReplaceAllSubstr(var, "æ", "AE");
-  ReplaceAllSubstr(var, "Ä", "AE");
-  ReplaceAllSubstr(var, "ä", "AE");
 
-  ReplaceAllSubstr(var, "Å", "A");
-  ReplaceAllSubstr(var, "å", "A");
-  ReplaceAllSubstr(var, "Â", "A");
-  ReplaceAllSubstr(var, "â", "A");
-  ReplaceAllSubstr(var, "À", "A");
-  ReplaceAllSubstr(var, "à", "A");
-  ReplaceAllSubstr(var, "Á", "A");
-  ReplaceAllSubstr(var, "á", "A");
+  ReplaceAllChar(var, 192, "A");
+  ReplaceAllChar(var, 193, "A");
+  ReplaceAllChar(var, 194, "A");
+  ReplaceAllChar(var, 195, "A");
+  ReplaceAllChar(var, 196, "AE");
+  ReplaceAllChar(var, 197, "A");
+  ReplaceAllChar(var, 198, "AE");
+  ReplaceAllChar(var, 224, "A");
+  ReplaceAllChar(var, 225, "A");
+  ReplaceAllChar(var, 226, "A");
+  ReplaceAllChar(var, 227, "A");
+  ReplaceAllChar(var, 228, "AE");
+  ReplaceAllChar(var, 229, "A");
+  ReplaceAllChar(var, 230, "AE");
 
-  ReplaceAllSubstr(var, "Ç", "C");
-  ReplaceAllSubstr(var, "Ç", "C");
+  ReplaceAllChar(var, 199, "C");
+  ReplaceAllChar(var, 231, "C");
 
-  ReplaceAllSubstr(var, "Ê", "E");
-  ReplaceAllSubstr(var, "ê", "E");
-  ReplaceAllSubstr(var, "È", "E");
-  ReplaceAllSubstr(var, "è", "E");
-  ReplaceAllSubstr(var, "É", "E");
-  ReplaceAllSubstr(var, "é", "E");
+  ReplaceAllChar(var, 200, "E");
+  ReplaceAllChar(var, 201, "E");
+  ReplaceAllChar(var, 202, "E");
+  ReplaceAllChar(var, 203, "E");
+  ReplaceAllChar(var, 232, "E");
+  ReplaceAllChar(var, 233, "E");
+  ReplaceAllChar(var, 234, "E");
+  ReplaceAllChar(var, 235, "E");
 
-  ReplaceAllSubstr(var, "Ï", "I");
-  ReplaceAllSubstr(var, "ï", "I");
-  ReplaceAllSubstr(var, "Î", "I");
-  ReplaceAllSubstr(var, "î", "I");
-  ReplaceAllSubstr(var, "Ì", "I");
-  ReplaceAllSubstr(var, "ì", "I");
-  ReplaceAllSubstr(var, "Í", "I");
-  ReplaceAllSubstr(var, "í", "I");
+  ReplaceAllChar(var, 204, "I");
+  ReplaceAllChar(var, 205, "I");
+  ReplaceAllChar(var, 206, "I");
+  ReplaceAllChar(var, 207, "I");
+  ReplaceAllChar(var, 236, "I");
+  ReplaceAllChar(var, 237, "I");
+  ReplaceAllChar(var, 238, "I");
+  ReplaceAllChar(var, 239, "I");
 
-  ReplaceAllSubstr(var, "Ö", "OE");
-  ReplaceAllSubstr(var, "ö", "OE");
-  ReplaceAllSubstr(var, "Ø", "O");
-  ReplaceAllSubstr(var, "ø", "O");
-  ReplaceAllSubstr(var, "Ô", "O");
-  ReplaceAllSubstr(var, "ô", "O");
-  ReplaceAllSubstr(var, "Ò", "O");
-  ReplaceAllSubstr(var, "ò", "O");
-  ReplaceAllSubstr(var, "Ó", "O");
-  ReplaceAllSubstr(var, "ó", "O");
+  ReplaceAllChar(var, 210, "O");
+  ReplaceAllChar(var, 211, "O");
+  ReplaceAllChar(var, 212, "O");
+  ReplaceAllChar(var, 213, "O");
+  ReplaceAllChar(var, 214, "OE");
+  ReplaceAllChar(var, 242, "O");
+  ReplaceAllChar(var, 243, "O");
+  ReplaceAllChar(var, 244, "O");
+  ReplaceAllChar(var, 245, "O");
+  ReplaceAllChar(var, 246, "OE");
 
-  ReplaceAllSubstr(var, "ß", "SS");
+  ReplaceAllChar(var, 223, "SS");
   ReplaceAllSubstr(var, "Ş", "S");
   ReplaceAllSubstr(var, "ş", "S");
 
-  ReplaceAllSubstr(var, "ü", "UE");
-  ReplaceAllSubstr(var, "Ü", "UE");
-  ReplaceAllSubstr(var, "Ů", "U");
-  ReplaceAllSubstr(var, "Û", "U");
-  ReplaceAllSubstr(var, "û", "U");
-  ReplaceAllSubstr(var, "Ù", "U");
-  ReplaceAllSubstr(var, "ù", "U");
+  ReplaceAllChar(var, 252, "UE");
+  ReplaceAllChar(var, 220, "UE");
+  ReplaceAllChar(var, 217, "U");
+  ReplaceAllChar(var, 218, "U");
+  ReplaceAllChar(var, 219, "U");
+  ReplaceAllChar(var, 249, "U");
+  ReplaceAllChar(var, 250, "U");
+  ReplaceAllChar(var, 251, "U");
+  ReplaceAllChar(var, 252, "U");
   //remove everything left, that is non ascii
   var.erase(remove_if(var.begin(),var.end(), invalidChar), var.end());
 } //end replaceNonAscii
