@@ -10,7 +10,7 @@ using namespace std;
  */
 //[[Rcpp::export]]
 CharacterVector StandardizeString(CharacterVector strings) {
-  CharacterVector res = NULL;
+  CharacterVector res = (const int&)NULL;
   if (TYPEOF(strings) == STRSXP) { // case input is of type character
     vector < string > vars = Rcpp::as < std::vector<string> > (strings);
     for (unsigned i = 0;  i< vars.size(); i++) {

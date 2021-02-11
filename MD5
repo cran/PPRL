@@ -1,9 +1,9 @@
-c22b5a4c0439990dca7c864cae0caca2 *DESCRIPTION
+3ea40ed2e532083315de68a8c8d3f31e *DESCRIPTION
 c7d70683daf15740ee9e384a8fd87b18 *NAMESPACE
 f87b3a54444c113409d15d06ac3a6f96 *R/Linkage.R
 0ce15dfbe932162ef316e19e385fb6d5 *R/MTBOptions.R
 781003a8d9dbfd7cd2578d2f9246f799 *R/PPRL.R
-9aaf2e5fb07d530e3a23c23acb9bdc9d *R/RcppExports.R
+3749d76db101c29d2ae7139e3264f2d2 *R/RcppExports.R
 5886859446e756294c5ddd5b9d26355d *inst/extdata/TestMatrize.csv
 abecc01b2aadf76b4a7ea24e91e87a8f *inst/extdata/testdata.csv
 dde0b786122aef3e85b35aa63ee96cd6 *inst/include/flowWorkspace.h
@@ -113,7 +113,7 @@ b1ee39b2ce4b794cfb7c1f77c9f1a435 *src/QueryResult.h
 1908144a1f1c6cbdf48c609b96c342a8 *src/RcppExports.cpp
 26b96a8f03327c8188b54e6532612b06 *src/Standardisation.cpp
 838407ff8229cfa156ceaf6d62847618 *src/Standardisation.h
-78816d398883749575ff208bfd8c1abb *src/StandardizeString.cpp
+3fbd2b03c48907527a844c748a0ec22e *src/StandardizeString.cpp
 c91caea57147ea0ca9e9de5d67490ba9 *src/Util.cpp
 ea1a37b4c2044ec496cd7693535f1e15 *src/Util.h
 323955a423c8491f998f452ed0c44d59 *src/WolframRule30.cpp
