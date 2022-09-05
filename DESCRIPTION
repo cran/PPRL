@@ -1,8 +1,8 @@
 Package: PPRL
 Type: Package
 Title: Privacy Preserving Record Linkage
-Version: 0.3.6
-Date: 2021-02-10
+Version: 0.3.7
+Date: 2022-09-05
 Authors@R: c(person("Rainer", "Schnell", role = c("aut","cph")),
     person("Dorothea", "Rukasz", role = c("aut", "cre"), email = "mitarbeiter.schnell@uni-due.de"),
     person("Christian", "Borgs", role = "ctb"),
@@ -20,15 +20,14 @@ Author: Rainer Schnell [aut, cph],
   Stephen Lacy [ctb] (Double Metaphone),
   Apache Software Foundation [cph]
 Maintainer: Dorothea Rukasz <mitarbeiter.schnell@uni-due.de>
-Description: A toolbox for deterministic, probabilistic and privacy-preserving record linkage techniques. Combines the functionality of the 'Merge ToolBox' (<http://record-linkage.de>) with current privacy-preserving techniques.
+Description: A toolbox for deterministic, probabilistic and privacy-preserving record linkage techniques. Combines the functionality of the 'Merge ToolBox' (<https://www.record-linkage.de>) with current privacy-preserving techniques.
 License: GPL-3
-LazyData: TRUE
 Depends: R (>= 3.1.0)
 Imports: Rcpp (>= 0.12.7), settings
 LinkingTo: Rcpp
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 NeedsCompilation: yes
 Encoding: UTF-8
-Packaged: 2021-02-11 08:07:25 UTC; Usurp4t0r
+Packaged: 2022-09-05 11:05:02 UTC; julian
 Repository: CRAN
-Date/Publication: 2021-02-11 08:30:02 UTC
+Date/Publication: 2022-09-05 11:30:02 UTC

@@ -1,6 +1,5 @@
 // Enable C++11 via this plugin
 // [[Rcpp::plugins("cpp11")]]
-// [[Rcpp::plugins("unwindProtect")]]
 
 #include <Rcpp.h>
 #include "FunctionWrapper.h"

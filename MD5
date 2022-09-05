@@ -1,9 +1,9 @@
-3ea40ed2e532083315de68a8c8d3f31e *DESCRIPTION
+450c7e092c87500bcf5f871dc82156bf *DESCRIPTION
 c7d70683daf15740ee9e384a8fd87b18 *NAMESPACE
-f87b3a54444c113409d15d06ac3a6f96 *R/Linkage.R
+78e8047c5c20705e11548ab371300987 *R/Linkage.R
 0ce15dfbe932162ef316e19e385fb6d5 *R/MTBOptions.R
 781003a8d9dbfd7cd2578d2f9246f799 *R/PPRL.R
-3749d76db101c29d2ae7139e3264f2d2 *R/RcppExports.R
+9aaf2e5fb07d530e3a23c23acb9bdc9d *R/RcppExports.R
 5886859446e756294c5ddd5b9d26355d *inst/extdata/TestMatrize.csv
 abecc01b2aadf76b4a7ea24e91e87a8f *inst/extdata/testdata.csv
 dde0b786122aef3e85b35aa63ee96cd6 *inst/include/flowWorkspace.h
@@ -53,7 +53,7 @@ a24b70e69dc07019ddb9557850f35fae *src/CreateESL.h
 680f65094c95e0d483cc2d0f4bf4fe4e *src/DeterministicLinkageWrapper.h
 8cfcd72f968f1c7d7efc8e9f3d724d91 *src/ElegantPairingFunctions.cpp
 08b177b301c894dd36514041ed9a903f *src/ElegantPairingFunctions.h
-1fcf65e935dc3998ca1d8fce1288f084 *src/FunctionWrapper.cpp
+1b24d5154c50996db26e717880977cc6 *src/FunctionWrapper.cpp
 5a8996bb32195ed309fdd750c236be15 *src/FunctionWrapper.h
 bacb75e3d45c97cbfb08742d445dc846 *src/Hashing.cpp
 82833577ae28cc3e9389412e6d5416d1 *src/Hashing.h
@@ -101,8 +101,8 @@ d855f906d1ec2a861c298744582e8638 *src/MTB_Metaphone.h
 85898546ea6d5aa3970c9f2a98cf71e7 *src/MTB_Tanimoto.cpp
 4cc48c952e8114adb113d079c7d849b1 *src/MTB_Tanimoto.h
 f57e4cfe10f95ce2e91d563969c1dff5 *src/MTB_Variables.h
-10855b516b2ab54aa8ee9ab9b6c7194a *src/Makevars
-e3d3cb360fbfdb3c6974e14eb5f09870 *src/Makevars.win
+73a46412c53647174d6e61363be361ef *src/Makevars
+8d6691bbad0bf283b7d8ebeabb0e5049 *src/Makevars.win
 fb674c45ae15c3b8b558be7afc950b42 *src/MergingConfiguration.cpp
 eaf99f85e35a0c63249dcb6e682c002d *src/MergingConfiguration.h
 211ab239019b3ce7e209d871abddcc74 *src/Misc.h
@@ -110,7 +110,7 @@ eaf99f85e35a0c63249dcb6e682c002d *src/MergingConfiguration.h
 26f4ab1a78bf2c712030590e054a52be *src/ProbabilisticLinkageWrapper.h
 affc63fd3a3889de423dfff076407e97 *src/QueryResult.cpp
 b1ee39b2ce4b794cfb7c1f77c9f1a435 *src/QueryResult.h
-1908144a1f1c6cbdf48c609b96c342a8 *src/RcppExports.cpp
+54716c558a9dfb896963a0730f25ca49 *src/RcppExports.cpp
 26b96a8f03327c8188b54e6532612b06 *src/Standardisation.cpp
 838407ff8229cfa156ceaf6d62847618 *src/Standardisation.h
 3fbd2b03c48907527a844c748a0ec22e *src/StandardizeString.cpp

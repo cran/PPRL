@@ -23,7 +23,7 @@ DeterministicLinkage <- function(IDA, dataA, IDB, dataB, blocking = NULL, simila
     blockingMethod_ <- "0"
   }
   # just one similarity option
-  if (class(similarity) != "list"){
+  if (!(inherits(similarity, "list"))){
     vars1 <- c(vars1, dataA[,match(similarity('variable1'),colnames( dataA ))])
     vars2 <- c(vars2, dataB[,match(similarity('variable2'),colnames( dataB ))])
     method <- c(method, similarity('method'))
@@ -38,7 +38,7 @@ DeterministicLinkage <- function(IDA, dataA, IDB, dataB, blocking = NULL, simila
     names(res)[3] <- paste(similarity('variable1'), "vs", similarity('variable2'), names(res)[3]) #rename columns
   }
   # if similarity is a list
-  else if (class(similarity) == "list"){
+  else if (inherits(similarity, "list")){
      for(l in similarity){
     #   # (match(similarity('variable1'),colnames( dataA ))) gets the number of the column in dataA
        vars1 <-NULL
@@ -90,7 +90,7 @@ ProbabilisticLinkage <- function(IDA, dataA, IDB, dataB,  blocking = NULL , simi
     blockingMethod_ <- "0"
   }
   # if similarity is a list
-  if (class(similarity) == "list"){
+  if (inherits(similarity, "list")){
     vars1 <- NULL
     vars2 <- NULL
     for(l in similarity){
