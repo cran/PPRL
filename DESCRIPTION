@@ -1,8 +1,8 @@
 Package: PPRL
 Type: Package
 Title: Privacy Preserving Record Linkage
-Version: 0.3.7
-Date: 2022-09-05
+Version: 0.3.8
+Date: 2022-11-10
 Authors@R: c(person("Rainer", "Schnell", role = c("aut","cph")),
     person("Dorothea", "Rukasz", role = c("aut", "cre"), email = "mitarbeiter.schnell@uni-due.de"),
     person("Christian", "Borgs", role = "ctb"),
@@ -28,6 +28,6 @@ LinkingTo: Rcpp
 RoxygenNote: 7.2.1
 NeedsCompilation: yes
 Encoding: UTF-8
-Packaged: 2022-09-05 11:05:02 UTC; julian
+Packaged: 2022-11-10 10:23:54 UTC; julian
 Repository: CRAN
-Date/Publication: 2022-09-05 11:30:02 UTC
+Date/Publication: 2022-11-10 10:50:02 UTC

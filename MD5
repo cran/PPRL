@@ -1,4 +1,4 @@
-450c7e092c87500bcf5f871dc82156bf *DESCRIPTION
+bb2e75e29f00cb72156bb2a260b7cf2b *DESCRIPTION
 c7d70683daf15740ee9e384a8fd87b18 *NAMESPACE
 78e8047c5c20705e11548ab371300987 *R/Linkage.R
 0ce15dfbe932162ef316e19e385fb6d5 *R/MTBOptions.R
@@ -111,7 +111,7 @@ eaf99f85e35a0c63249dcb6e682c002d *src/MergingConfiguration.h
 affc63fd3a3889de423dfff076407e97 *src/QueryResult.cpp
 b1ee39b2ce4b794cfb7c1f77c9f1a435 *src/QueryResult.h
 54716c558a9dfb896963a0730f25ca49 *src/RcppExports.cpp
-26b96a8f03327c8188b54e6532612b06 *src/Standardisation.cpp
+1c8e99b9c40d9b6a6f17ee09864be5f9 *src/Standardisation.cpp
 838407ff8229cfa156ceaf6d62847618 *src/Standardisation.h
 3fbd2b03c48907527a844c748a0ec22e *src/StandardizeString.cpp
 c91caea57147ea0ca9e9de5d67490ba9 *src/Util.cpp
